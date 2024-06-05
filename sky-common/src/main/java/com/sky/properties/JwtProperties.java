@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @ConfigurationProperties(prefix = "sky.jwt")
+//创造bean的时候，自动填充数据
 @Data
 public class JwtProperties {
 

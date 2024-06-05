@@ -14,9 +14,11 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @ApiModel(description = "员工登录返回的数据格式")
+//对DTO进行描述
 public class EmployeeLoginVO implements Serializable {
 
     @ApiModelProperty("主键值")
+    //对属性进行描述
     private Long id;
 
     @ApiModelProperty("用户名")
