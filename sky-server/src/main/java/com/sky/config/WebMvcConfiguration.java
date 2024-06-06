@@ -77,6 +77,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
     }
 
 
+    //Override SpringMVC的消息转换器，起到把DateTime统一格式
     @Override
     public void extendMessageConverters(List<HttpMessageConverter<?>> converters){
         log.info("扩展消息转换器");

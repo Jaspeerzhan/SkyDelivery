@@ -93,10 +93,34 @@ public class EmployeeController {
     @ApiOperation("员工分页查询")
     @GetMapping("/page")
     public Result<PageResult> page(EmployeePageQueryDTO employeePageQueryDTO){
-        //通过实体类属性名，封装GET请求的query
+        //通过实体类属性名因为不是JSON格式不需要@RequestBody，封装GET请求的query
         log.info("员工分页查询{}",employeePageQueryDTO);
         PageResult pageResult = employeeService.pageQuery(employeePageQueryDTO);
         //result返回PageResult
         return Result.success(pageResult);
     }
+
+
+    @ApiOperation("启用禁用员工账号")
+    @PostMapping("/status/{status}")
+    public Result startOrStop(@PathVariable Integer status,@RequestParam Long id){
+        log.info("启用禁用员工账号：{}，{}",status,id);
+        employeeService.startOrStop(status,id);
+        return Result.success();
+    }
+
+    @GetMapping("/{id}")
+    @ApiOperation("查询指定员工")
+    public Result<Employee> getById(@PathVariable Long id){
+        return Result.success(employeeService.getById(id));
+    }
+
+    @PutMapping
+    @ApiOperation("修改员工")
+    public Result update(@RequestBody EmployeeDTO employeeDTO){
+        log.info("修改员工{}",employeeDTO.getIdNumber());
+        employeeService.update(employeeDTO);
+        return Result.success();
+    }
+
 }

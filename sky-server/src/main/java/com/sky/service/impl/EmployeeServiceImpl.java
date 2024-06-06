@@ -77,12 +77,11 @@ public class EmployeeServiceImpl implements EmployeeService {
         BeanUtils.copyProperties(employeeDTO, employee);
         //把相同属性名的属性值，从DTO拷贝到employee
         employee.setStatus(StatusConstant.ENABLE);
-        employee.setCreateTime(LocalDateTime.now());
-        employee.setUpdateTime(LocalDateTime.now());
+//        employee.setCreateTime(LocalDateTime.now());
+//        employee.setUpdateTime(LocalDateTime.now());
         employee.setPassword(DigestUtils.md5DigestAsHex(PasswordConstant.DEFAULT_PASSWORD.getBytes()));
-        //TODO 等待更新当前用户ID
-        employee.setCreateUser(BaseContext.getCurrentId());
-        employee.setUpdateUser(BaseContext.getCurrentId());
+//        employee.setCreateUser(BaseContext.getCurrentId());
+//        employee.setUpdateUser(BaseContext.getCurrentId());
         employeeMapper.insert(employee);
     }
 
@@ -98,6 +97,30 @@ public class EmployeeServiceImpl implements EmployeeService {
         return new PageResult(total, employees);
     }
 
+    public  void startOrStop(Integer status, Long id){
+//        Employee employee = new Employee();
+//        employee.setStatus(status);
+//        employee.setId(id); 或者因为有builder注解
+        Employee employee = Employee.builder().status(status).id(id).build();
+        //通过属性值来直接构造
+        employeeMapper.update(employee);
+        //这样可以通用的更新employee字段
+    }
 
+    @Override
+    public Employee getById(Long id){
+        Employee employee= employeeMapper.getById(id);
+        employee.setPassword("****");
+        return employee;
+    }
+
+    @Override
+    public void update(EmployeeDTO employeeDTO){
+        Employee employee = new Employee();
+        BeanUtils.copyProperties(employeeDTO,employee);
+//        employee.setUpdateTime(LocalDateTime.now());
+//        employee.setUpdateUser(BaseContext.getCurrentId());
+        employeeMapper.update(employee);
+    }
 
 }
