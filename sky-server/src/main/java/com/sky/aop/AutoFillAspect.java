@@ -27,15 +27,15 @@ public class AutoFillAspect {
 
 
     @Before("ptByAnnotation()")
-    public void addCommon(JoinPoint JoinPoint) throws Throwable {
+    public void addCommon(JoinPoint joinPoint) throws Throwable {
         //joinpoint是目标方法
         log.info("开始进行公共字段填充");
         //获取当前被拦截的方法上的数据库操作类型
-        MethodSignature signature = (MethodSignature) JoinPoint.getSignature(); //获得方法签名
+        MethodSignature signature = (MethodSignature) joinPoint.getSignature(); //获得方法签名
         AutoFill annotation = signature.getMethod().getAnnotation(AutoFill.class);
         OperationType operationType = annotation.value(); //获得实际操作类型
         //获得被拦截方法的参数
-        Object[] args = JoinPoint.getArgs();
+        Object[] args = joinPoint.getArgs();
         if(args == null || args.length == 0){
             return;
         }

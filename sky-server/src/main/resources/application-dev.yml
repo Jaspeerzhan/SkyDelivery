@@ -10,3 +10,13 @@ sky:
   alioss:
     endPoint: oss-cn-beijing.aliyuncs.com
     bucketName: freetrial
+  redis:
+    host: localhost
+    port: 6379
+    password: 123456
+    database: 0
+#    database 0不同的数据库，默认生成了16个库
+
+  wechat:
+    appid: wxa3a75c3ef5b35206
+    secret: cb1060c911fa0e3031200024829f99d4

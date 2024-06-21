@@ -3,6 +3,7 @@ package com.sky.service;
 import com.github.pagehelper.Page;
 import com.sky.dto.DishDTO;
 import com.sky.dto.DishPageQueryDTO;
+import com.sky.entity.Dish;
 import com.sky.result.PageResult;
 import com.sky.vo.DishVO;
 
@@ -22,4 +23,6 @@ public interface DishService {
     DishVO getByDishId(Long id);
 
     List<DishVO> list(Long categoryId);
+
+    List<DishVO> listWithFlavor(Dish dish);
 }

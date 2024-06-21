@@ -29,4 +29,6 @@ public interface CategoryMapper {
 
     @Select("SELECT * from category where type = #{type}")
     List<Category> list(String type);
+
+    List<Category> list2(Integer type);
 }
