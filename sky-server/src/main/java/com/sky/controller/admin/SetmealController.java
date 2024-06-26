@@ -11,6 +11,10 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,6 +23,7 @@ import java.util.List;
 @Slf4j
 @Api("套餐管理接口")
 @RequestMapping("/admin/setmeal")
+@EnableCaching // 实际上是对Controller生成了代理对象，进行增强，因此可以不调用方法Cacheable
 public class SetmealController {
     @Autowired
     private SetmealService setmealService;
@@ -31,6 +36,7 @@ public class SetmealController {
 
     @PostMapping
     @ApiOperation("新增套餐")
+    //方法调用结束后，id会赋值到DTO上
     public Result save(@RequestBody SetmealDTO setmealDTO){
         setmealService.save(setmealDTO);
         return Result.success();
